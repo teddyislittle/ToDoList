@@ -1,15 +1,48 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import service.TaskServices;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws SQLException {
+        //SHA256:csDczTXAXEmwcsNs/1LmdEWmi8fsK3Ck+o7ZzGPlotw
+
+        TaskServices taskServisec = new TaskServices();
+
+        Scanner in = new Scanner(System.in);
+
+
+        while (true) {
+            System.out.println("Выберите действие:");
+            System.out.println("1. Создать задачу");
+            System.out.println("2. Редактировать задачу");
+            System.out.println("3. Удалить задачу");
+            System.out.println("4. Показать задачи");
+            System.out.println("5. Выход");
+            System.out.print("Ваш выбор: ");
+
+            int choice = in.nextInt();
+            in.nextLine(); // очистка буфера
+
+            switch (choice) {
+                case 1:
+                    taskServisec.createTask(in);
+                    break;
+                case 2:
+                    taskServisec.editTask(in);
+                    break;
+                case 3:
+                    taskServisec.deleteTask(in);
+                    break;
+                case 4:
+                    taskServisec.viewTask();
+                    break;
+                case 5:
+                    System.out.println("Завершение программы.");
+                    System.exit(0);
+                default:
+                    System.out.println("Некорректный выбор. Попробуйте снова.");
+            }
         }
     }
 }
